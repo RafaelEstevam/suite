@@ -2,6 +2,13 @@ version: "3.8"
 
 services:
   todolist:
-    build: ./toDoList
+    build: ./to-do-list
     ports:
-      - 3001:3001
+      - 3000:3000
+    volumes:
+      - ./to-do-list:/app
+      - ./to-do-list/node_modules
+    environment:
+      - WDS_SOCKET_HOST=127.0.0.1 
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
