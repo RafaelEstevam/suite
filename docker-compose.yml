@@ -1,0 +1,7 @@
+version: "3.8"
+
+services:
+  todolist:
+    build: ./toDoList
+    ports:
+      - 3001:3001
