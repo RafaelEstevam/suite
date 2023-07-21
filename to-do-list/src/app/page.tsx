@@ -1,5 +1,11 @@
+
+import Template from "@/template"
+import Form from "@/components/Form"
+
 export default function Home() {
   return (
-    <p>teste 123123 teste 123</p>
+    <Template>
+      <Form />
+    </Template>
   )
 }
