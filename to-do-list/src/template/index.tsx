@@ -6,9 +6,9 @@ interface TemplateProps {
 
 const Template = ({children}: TemplateProps) => {
     return (
-        <>
+        <div className="w-full h-screen">
             {children}
-        </>
+        </div>
     )
 }
 

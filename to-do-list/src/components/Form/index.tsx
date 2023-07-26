@@ -1,31 +1,27 @@
-"use client"
 
-import { useEffect, useState } from "react";
 import Input from "../Input";
 import Button from "../Button";
+import { useContext } from "react";
+import { TasksContext } from "@/pages/tasks/context";
 
-interface FormDataProps {
+interface FormFieldProps {
     taskName: string
 }
 
 const Form = () => {
 
-    const [formData, setFormData] = useState<FormDataProps>({taskName: ""});
+    const {formData, setFormData, onSubmit} = useContext(TasksContext)
 
     const handleSetFormData = (e:any) => {
         setFormData({...formData, ...{[e.target.name]: e.target.value} })
-        console.log(e.target.value)
-    }
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        console.log(formData);
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <Input name="taskName" id="taskName" value={formData.taskName} onChange={handleSetFormData} />
-            <Button label="Add" type="submit" />
+        <form onSubmit={onSubmit}>
+            <div className="flex mb-4">
+                <Input name="taskName" id="taskName" value={formData.taskName} onChange={handleSetFormData} />
+                <Button id="add-task" label={formData.id ? `Put` : `Add`} type="submit" className="p-4 bg-slate-600 rounded-e hover:bg-slate-800 " />
+            </div>
         </form>
     )
 };

@@ -1,11 +1,11 @@
 
 import Template from "@/template"
-import Form from "@/components/Form"
+import Tasks from "@/pages/tasks"
 
 export default function Home() {
   return (
     <Template>
-      <Form />
+      <Tasks />
     </Template>
   )
 }

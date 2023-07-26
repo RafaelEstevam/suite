@@ -10,7 +10,9 @@ interface InputProps {
 
 const Input = ({...props}:InputProps) => {
     return (
-        <input className="rounded-sm text-slate-800" {...props} />
+        <div className="flex w-full">
+            <input className="rounded-s text-slate-800 w-full p-4" {...props} />
+        </div>
     )
 }
 
