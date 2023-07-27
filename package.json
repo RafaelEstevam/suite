@@ -1,0 +1,21 @@
+{
+  "name": "suite",
+  "version": "1.0.0",
+  "description": "A docker project with all new projetcs inside.",
+  "main": "index.js",
+  "scripts": {
+    "build": "docker-compose build",
+    "up": "docker-compose up",
+    "effective:config": "circleci config process circle.yml | sed /^#/d"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RafaelEstevam/suite.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RafaelEstevam/suite/issues"
+  },
+  "homepage": "https://github.com/RafaelEstevam/suite#readme"
+}
