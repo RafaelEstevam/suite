@@ -1,11 +1,16 @@
 {
   "name": "e2e",
   "version": "1.0.0",
-  "description": "Cypress test",
+  "description": "Cypress tests",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "private": true,
+  "devDependencies": {
+    "cypress": "^12.17.2"
+  }
 }
