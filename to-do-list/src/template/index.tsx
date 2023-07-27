@@ -1,15 +1,11 @@
-import { ReactNode, Fragment } from "react"
+import { ReactNode, Fragment } from "react";
 
 interface TemplateProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
-const Template = ({children}: TemplateProps) => {
-    return (
-        <div className="w-full h-screen">
-            {children}
-        </div>
-    )
-}
+const Template = ({ children }: TemplateProps) => {
+  return <div className="w-full h-screen">{children}</div>;
+};
 
-export default Template
+export default Template;
