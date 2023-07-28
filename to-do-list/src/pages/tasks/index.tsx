@@ -49,13 +49,17 @@ const Tasks = () => {
 
   return (
     <TasksContext.Provider value={context}>
-      <div className="flex flex-col justify-center items-center pt-4 min-h-screen bg-slate-950">
-        <div className="w-2/4">
-          <Form />
-          <div className="w-full">
-            {tasksList.map(({ ...props }) => (
-              <TaskItem key={props.id} id={props.id} name={props.name} />
-            ))}
+      <div className="min-h-screen pt-60 bg-slate-950">
+        <div className="flex flex-col justify-center items-center">
+          <div className="w-2/4">
+            <Form />
+          </div>
+          <div className="w-2/4">
+            <div className="w-full">
+              {tasksList.map(({ ...props }) => (
+                <TaskItem key={props.id} id={props.id} name={props.name} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
