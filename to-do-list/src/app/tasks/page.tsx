@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { API } from "@/config/api";
 import Form from "@/components/Form";
 import TaskItem, { TaskItemProps } from "@/components/TaskItem";
-import { useState } from "react";
 import { TasksContext, TasksContextProps } from "./context";
 
 export interface FormDataProps {
@@ -13,6 +15,14 @@ export interface FormDataProps {
 const Tasks = () => {
   const [formData, setFormData] = useState<FormDataProps>({ taskName: "" });
   const [tasksList, setTasksList] = useState<TaskItemProps[]>([]);
+
+  const { data, isFetched, isError } = useQuery({
+    queryKey: ["tasks"],
+    queryFn: async () => {
+      return await API.get("/tasks");
+    },
+    staleTime: 1000 * 60,
+  });
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
