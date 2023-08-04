@@ -4,10 +4,10 @@ import { TasksContext } from "../../app/tasks/context";
 
 export interface TaskItemProps {
   id: string;
-  name: string;
+  taskName: string;
 }
 
-const TaskItem = ({ id, name }: TaskItemProps) => {
+const TaskItem = ({ id, taskName }: TaskItemProps) => {
   const { setFormData, tasksList, setTasksList } = useContext(TasksContext);
 
   const [complete, setComplete] = useState<boolean>(false);
@@ -17,7 +17,7 @@ const TaskItem = ({ id, name }: TaskItemProps) => {
   };
 
   const handleEdit = () => {
-    setFormData({ taskName: name, id });
+    setFormData({ taskName, id });
   };
 
   const handleDelete = () => {
@@ -26,7 +26,7 @@ const TaskItem = ({ id, name }: TaskItemProps) => {
   };
 
   return (
-    <div className="bg-slate-500 rounded mb-4 w-full p-4 flex items-center justify-between gap-4">
+    <div id={id} className="bg-slate-500 rounded mb-4 w-full p-4 flex items-center justify-between gap-4">
       <div className="flex gap-4">
         <input
           type="checkbox"
@@ -34,7 +34,7 @@ const TaskItem = ({ id, name }: TaskItemProps) => {
           value={complete ? `true` : `false`}
           onChange={handleCheck}
         />
-        {complete ? <p className="line-through">{name}</p> : <p>{name}</p>}
+        {complete ? <p className="line-through" data-taskid={id}>{taskName}</p> : <p data-taskid={id}>{taskName}</p>}
       </div>
       <div>
         <Button

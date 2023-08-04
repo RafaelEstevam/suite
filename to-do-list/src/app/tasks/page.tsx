@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { API } from "@/config/api";
 import Form from "@/components/Form";
@@ -29,7 +29,7 @@ const Tasks = () => {
 
     const data: TaskItemProps = {
       id: formData.id || Math.random().toString(),
-      name: formData.taskName,
+      taskName: formData.taskName,
     };
 
     if (formData.id) {
@@ -37,7 +37,7 @@ const Tasks = () => {
       const filteredTasks = tasksList.filter((item) => item.id !== data.id);
 
       if (findedTask) {
-        findedTask.name = formData.taskName;
+        findedTask.taskName = formData.taskName;
         setTasksList([...filteredTasks, ...[findedTask]]);
       }
 
@@ -57,6 +57,12 @@ const Tasks = () => {
     onSubmit: handleSubmit,
   };
 
+  useEffect(() => {
+    if(data?.data.length > 0){
+      setTasksList(data?.data);
+    }
+  }, [data])
+
   return (
     <TasksContext.Provider value={context}>
       <div className="min-h-screen pt-60 bg-slate-950">
@@ -67,7 +73,7 @@ const Tasks = () => {
           <div className="w-2/4">
             <div className="w-full">
               {tasksList.map(({ ...props }) => (
-                <TaskItem key={props.id} id={props.id} name={props.name} />
+                <TaskItem key={props.id} id={props.id} taskName={props.taskName} />
               ))}
             </div>
           </div>
