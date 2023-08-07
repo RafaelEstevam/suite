@@ -24,29 +24,38 @@ const Tasks = () => {
     staleTime: 1000 * 60,
   });
 
-  const handleSubmit = (e: any) => {
+  const handlePutTaskEditaded = async (data: TaskItemProps) => {
+    const response = await API.put(`/tasks/${formData.id}`, data);
+    const task = response.data;
+    const filteredTasks = tasksList.filter((item) => item.id !== data.id);
+    if (task) {
+      task.taskName = formData.taskName;
+      setTasksList([...filteredTasks, ...[task]]);
+    }
+  }
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const data: TaskItemProps = {
-      id: formData.id || Math.random().toString(),
       taskName: formData.taskName,
     };
 
-    if (formData.id) {
-      const findedTask = tasksList.find((item) => item.id === data.id);
-      const filteredTasks = tasksList.filter((item) => item.id !== data.id);
-
-      if (findedTask) {
-        findedTask.taskName = formData.taskName;
-        setTasksList([...filteredTasks, ...[findedTask]]);
+    if(formData.id){
+      try{
+        await handlePutTaskEditaded(data)
+      }catch(e){
+        console.log(e)
       }
-
-      setFormData({ taskName: "" });
-      return;
     }
 
-    setTasksList([...tasksList, ...[data]]);
-    setFormData({ taskName: "" });
+    try{
+      const response = await API.post(`/tasks`, data);
+      const task = response.data;
+      setTasksList([...tasksList, ...[task]]);
+    }catch(e){
+      console.log(e)
+    }
   };
 
   const context: TasksContextProps = {

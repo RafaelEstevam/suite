@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import Button from "../Button";
 import { TasksContext } from "../../app/tasks/context";
+import { API } from "@/config/api";
 
 export interface TaskItemProps {
-  id: string;
+  id?: string;
   taskName: string;
 }
 
@@ -20,9 +21,14 @@ const TaskItem = ({ id, taskName }: TaskItemProps) => {
     setFormData({ taskName, id });
   };
 
-  const handleDelete = () => {
-    const newTasksList = tasksList.filter((item) => item.id !== id);
-    setTasksList(newTasksList);
+  const handleDelete = async () => {
+    try{
+      const response = await API.delete(`/tasks/${id}`);
+      const newTasksList = tasksList.filter((item) => item.id !== id);
+      setTasksList(newTasksList);
+    }catch(e){
+      console.log(e)
+    }
   };
 
   return (
