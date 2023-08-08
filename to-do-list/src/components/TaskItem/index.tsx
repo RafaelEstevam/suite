@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import Button from "../Button";
 import { TasksContext } from "../../app/tasks/context";
 import { API } from "@/config/api";
+import Link from "next/link";
 
 export interface TaskItemProps {
   id?: string;
@@ -40,7 +41,12 @@ const TaskItem = ({ id, taskName }: TaskItemProps) => {
           value={complete ? `true` : `false`}
           onChange={handleCheck}
         />
-        {complete ? <p className="line-through" data-taskid={id}>{taskName}</p> : <p data-taskid={id}>{taskName}</p>}
+        <Link href={{
+          pathname: `/tasks/${id}`
+          // query: {id}
+        }}>
+          {complete ? <p className="line-through" data-taskid={id}>{taskName}</p> : <p data-taskid={id}>{taskName}</p>}
+        </Link>
       </div>
       <div>
         <Button

@@ -10,7 +10,7 @@ routes.get('/', (req, res) => {
 routes.get('/tasks', TaskController.all);
 routes.get('/tasks/:id', TaskController.get);
 routes.post('/tasks', TaskController.post);
-routes.put('/tasks/:id', TaskController.put);
+routes.put('/tasks/:id', TaskController.put); 
 routes.delete('/tasks/:id', TaskController.delete);
 
 module.exports = routes;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { API } from "@/config/api";
 import Form from "@/components/Form";
 import TaskItem, { TaskItemProps } from "@/components/TaskItem";
@@ -13,8 +13,7 @@ export interface FormDataProps {
 }
 
 const Tasks = () => {
-  const [formData, setFormData] = useState<FormDataProps>({ taskName: "" });
-  const [tasksList, setTasksList] = useState<TaskItemProps[]>([]);
+  const queryClient = useQueryClient();
 
   const { data, isFetched, isError } = useQuery({
     queryKey: ["tasks"],
@@ -24,7 +23,10 @@ const Tasks = () => {
     staleTime: 1000 * 60,
   });
 
-  const handlePutTaskEditaded = async (data: TaskItemProps) => {
+  const [formData, setFormData] = useState<FormDataProps>({ taskName: "" });
+  const [tasksList, setTasksList] = useState<TaskItemProps[]>([]);
+
+  const handlePutTaskEditaded = async (data: TaskItemProps, formData: FormDataProps) => {
     const response = await API.put(`/tasks/${formData.id}`, data);
     const task = response.data;
     const filteredTasks = tasksList.filter((item) => item.id !== data.id);
@@ -38,24 +40,30 @@ const Tasks = () => {
     e.preventDefault();
 
     const data: TaskItemProps = {
+      id: formData.id,
       taskName: formData.taskName,
     };
 
     if(formData.id){
       try{
-        await handlePutTaskEditaded(data)
+        await handlePutTaskEditaded(data, formData)
       }catch(e){
         console.log(e)
       }
     }
 
-    try{
-      const response = await API.post(`/tasks`, data);
-      const task = response.data;
-      setTasksList([...tasksList, ...[task]]);
-    }catch(e){
-      console.log(e)
+    if(!formData.id){
+      try{
+        const response = await API.post(`/tasks`, data);
+        const task = response.data;
+        setTasksList([...tasksList, ...[task]]);
+      }catch(e){
+        console.log(e)
+      }
     }
+
+    await queryClient.invalidateQueries([`tasks`]);
+    
   };
 
   const context: TasksContextProps = {
