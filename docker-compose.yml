@@ -13,6 +13,42 @@ services:
       - WDS_SOCKET_HOST=127.0.0.1 
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
+
+  chat:
+    build: ./chat
+    ports:
+      - 5173:5173
+    container_name: chat
+    volumes:
+      - ./chat:/app
+      - ./chat/node_modules
+    environment:
+      - WDS_SOCKET_HOST=127.0.0.1 
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+
+  iframe:
+    build: ./iframe
+    ports:
+      - 5174:5173
+    container_name: iframe
+    volumes:
+      - ./iframe:/app
+      - ./chat/node_modules
+    environment:
+      - WDS_SOCKET_HOST=127.0.0.1 
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+
+  site:
+    build: ./site
+    ports:
+      - 8080:80
+    container_name: site
+    environment:
+      - WDS_SOCKET_HOST=127.0.0.1 
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
     
   back:
     build: ./back

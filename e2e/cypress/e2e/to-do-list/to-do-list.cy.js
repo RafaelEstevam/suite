@@ -56,7 +56,7 @@ describe(`Visit Printi Marvel`, () => {
 
     context(`CRUD Task`, () => {
         beforeEach(() => {
-            cy.visit(`http://localhost:3000/tasks`);
+            cy.visit(`https://printi.com.br`);
             cy.wait(5000);
         });
         
