@@ -1,31 +1,31 @@
 version: "3.8"
 
 services:
-  todolist:
-    build: ./to-do-list
-    ports:
-      - 3000:3000
-    container_name: to-do-list
-    volumes:
-      - ./to-do-list:/app
-      - ./to-do-list/node_modules
-    environment:
-      - WDS_SOCKET_HOST=127.0.0.1 
-      - CHOKIDAR_USEPOLLING=true
-      - WATCHPACK_POLLING=true
+  # todolist:
+  #   build: ./to-do-list
+  #   ports:
+  #     - 3000:3000
+  #   container_name: to-do-list
+  #   volumes:
+  #     - ./to-do-list:/app
+  #     - ./to-do-list/node_modules
+  #   environment:
+  #     - WDS_SOCKET_HOST=127.0.0.1 
+  #     - CHOKIDAR_USEPOLLING=true
+  #     - WATCHPACK_POLLING=true
 
-  chat:
-    build: ./chat
-    ports:
-      - 5173:5173
-    container_name: chat
-    volumes:
-      - ./chat:/app
-      - ./chat/node_modules
-    environment:
-      - WDS_SOCKET_HOST=127.0.0.1 
-      - CHOKIDAR_USEPOLLING=true
-      - WATCHPACK_POLLING=true
+  # chat:
+  #   build: ./chat
+  #   ports:
+  #     - 5173:5173
+  #   container_name: chat
+  #   volumes:
+  #     - ./chat:/app
+  #     - ./chat/node_modules
+  #   environment:
+  #     - WDS_SOCKET_HOST=127.0.0.1 
+  #     - CHOKIDAR_USEPOLLING=true
+  #     - WATCHPACK_POLLING=true
 
   iframe:
     build: ./iframe

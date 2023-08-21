@@ -9,5 +9,16 @@ export default defineConfig({
     watch: {
       usePolling: true
     }
-  }
+  },
+  build: {
+    rollupOptions: {
+        output: {
+            dir: 'dist',
+            entryFileNames: 'assets/chat.js',
+            assetFileNames: 'assets/chat.css',
+            chunkFileNames: "assets/chunk.js",
+            manualChunks: undefined,
+        }
+    }
+}
 })
